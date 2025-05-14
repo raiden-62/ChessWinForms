@@ -1,0 +1,16 @@
+# Ignore Visual Studio files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+
+# Ignore build and output directories
+bin/
+obj/
+
+# Ignore configuration files with sensitive data
+appsettings.json
+
+# Ignore log files
+*.log
