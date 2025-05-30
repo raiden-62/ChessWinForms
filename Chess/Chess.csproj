@@ -8,4 +8,61 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="PieceSprites\bB.png" />
+    <None Remove="PieceSprites\bK.png" />
+    <None Remove="PieceSprites\bN.png" />
+    <None Remove="PieceSprites\bP.png" />
+    <None Remove="PieceSprites\bQ.png" />
+    <None Remove="PieceSprites\bR.png" />
+    <None Remove="PieceSprites\wB.png" />
+    <None Remove="PieceSprites\wK.png" />
+    <None Remove="PieceSprites\wN.png" />
+    <None Remove="PieceSprites\wP.png" />
+    <None Remove="PieceSprites\wQ.png" />
+    <None Remove="PieceSprites\wR.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="PieceSprites\bB.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PieceSprites\bK.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="PieceSprites\bN.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PieceSprites\bP.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PieceSprites\bQ.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PieceSprites\bR.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PieceSprites\wB.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PieceSprites\wK.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PieceSprites\wN.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PieceSprites\wP.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PieceSprites\wQ.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PieceSprites\wR.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

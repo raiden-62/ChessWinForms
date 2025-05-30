@@ -16,7 +16,7 @@ namespace Chess
 
         private void ResumeGame(object sender, EventArgs e)
         {
-            var gameForm = new GameForm();
+            var gameForm = new GameForm(false); //add loading previous game
             gameForm.Show();
             this.Hide();
         }

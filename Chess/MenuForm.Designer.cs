@@ -65,13 +65,16 @@
             // 
             // cmbSerializeExtension
             // 
+            cmbSerializeExtension.DropDownHeight = 115;
+            cmbSerializeExtension.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             cmbSerializeExtension.FormattingEnabled = true;
+            cmbSerializeExtension.IntegralHeight = false;
             cmbSerializeExtension.Items.AddRange(new object[] { "JSON", "XML" });
-            cmbSerializeExtension.Location = new Point(600, 415);
+            cmbSerializeExtension.Location = new Point(600, 413);
             cmbSerializeExtension.Name = "cmbSerializeExtension";
-            cmbSerializeExtension.Size = new Size(151, 23);
+            cmbSerializeExtension.Size = new Size(158, 25);
             cmbSerializeExtension.TabIndex = 3;
-            cmbSerializeExtension.Text = "Формат сериализации ";
+            cmbSerializeExtension.Text = "Формат сериализации";
             // 
             // MenuForm
             // 
@@ -83,7 +86,7 @@
             Controls.Add(btnResumeGame);
             Controls.Add(btnNewGame);
             Name = "MenuForm";
-            Text = "Form1";
+            Text = "Chess Menu";
             ResumeLayout(false);
         }
 

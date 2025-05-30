@@ -28,30 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
+            GamePanel = new Panel();
             SuspendLayout();
             // 
-            // panel1
+            // GamePanel
             // 
-            panel1.Location = new Point(160, 15);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(480, 480);
-            panel1.TabIndex = 0;
-            panel1.Paint += panel1_Paint;
+            GamePanel.Location = new Point(160, 15);
+            GamePanel.Name = "GamePanel";
+            GamePanel.Size = new Size(480, 480);
+            GamePanel.TabIndex = 0;
+            //GamePanel.Paint += GamePanel_Paint;
             // 
             // GameForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 511);
-            Controls.Add(panel1);
+            Controls.Add(GamePanel);
             Name = "GameForm";
-            Text = "GameForm";
+            Text = "Chess";
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
+        private Panel GamePanel;
     }
 }
