@@ -87,6 +87,10 @@ namespace Chess
                     {
                         _cells[row, col].BackgroundImage = GetPieceSprite(_game.Board[row, col]);
                     }
+                    else
+                    {
+                        _cells[row, col].BackgroundImage = null;
+                    }
                 }
             }
         }
@@ -95,10 +99,10 @@ namespace Chess
         {
             if (draw) //Draw green possible cells
             {
-                if (m.Moves == null) return;
+                if (m==null || m.Moves == null) return;
                 foreach (var move in m.Moves)
                 {
-                    _cells[move.y, move.x].BackColor = Color.Green;
+                    _cells[move.x, move.y].BackColor = Color.Green;
                 }
             }
             else //Restore normal colors
@@ -149,9 +153,11 @@ namespace Chess
             var point = (Point)btn.Tag;
             int x = point.X; //row
             int y = point.Y; //col
+            _game.Move(x, y);
 
-            _game.Move(x,y);
-            if (_game.Board[y, x] != null) DrawPossibleMoves(_game.Board[y, x] as IFutureMove);
+            if (_game.Board[x, y] != null && _game.X1 != -1) DrawPossibleMoves(_game.Board[x, y] as IFutureMove);
+            if (_game.Board[x, y] != null && _game.X1 == -1) DrawPossibleMoves(null, false);
+
             SyncBoard();
         }
     }

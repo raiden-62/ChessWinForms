@@ -46,12 +46,13 @@ namespace Model
                 if ((Board[x, y] != null && Board[x, y].Color == ColorPlayer))
                 {
                     X1 = x; Y1 = y;
+                    Board[X1, Y1].MoveGenerator(Board); //Ходы должны генерироваться при первом клике 
                 }
                 return;
             }
             System.Diagnostics.Debug.WriteLine(x);
             System.Diagnostics.Debug.WriteLine(y);
-            Board[X1, Y1].MoveGenerator(Board);
+            //Board[X1, Y1].MoveGenerator(Board);
             Board[X1, Y1].Move(x, y,Board);
             if (Board[X1,Y1] == null)
             {
