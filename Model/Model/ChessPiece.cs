@@ -3,8 +3,8 @@
     public abstract class ChessPiece : IChessPiece, IFutureMove
     {
         public List<(int x, int y)> Moves { get; private set; }
-        public int XCoordinate { get; private set; } //это как бы Y
-        public int YCoordinate { get; private set; }// это как бы X
+        public int XCoordinate { get; private set; } //это как бы Y (строка)
+        public int YCoordinate { get; private set; }// это как бы X(столбец)
         public int Color { get; } //-1: Чёрные, 1: Белые
         public bool FirstMove { get; private set; }
         public virtual void Move(int x, int y, ChessPiece[,] board)

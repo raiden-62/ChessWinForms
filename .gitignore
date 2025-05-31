@@ -17,5 +17,5 @@ appsettings.json
 
 
 # .gitignore for C# projects
-[Bb]in/
-[Oo]bj/
+Model/bin/
+Model/obj/

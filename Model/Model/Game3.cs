@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    internal partial class Game
+    public partial class Game
     {
     }
 }

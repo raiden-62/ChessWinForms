@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using Model;
 
 namespace Chess
 {
@@ -15,6 +16,10 @@ namespace Chess
     {
         private Button[,] _cells;
         private const int cellSize = 45;
+        private Game _game;
+
+        private int[] chosenCell = new int[2] { -1, -1 }; //row, col
+
         public GameForm(bool newGame = true)
         {
             _cells = new Button[8, 8];
@@ -23,12 +28,13 @@ namespace Chess
 
             if (newGame)
             {
-                FillBoardDefault();
+                _game = new Game();
             }
             else
             {
                 //fill from serialized game
             }
+            SyncBoard();
         }
 
 
@@ -65,6 +71,47 @@ namespace Chess
             }
         }
 
+        public Image GetPieceSprite(ChessPiece piece)
+        {
+            string pieceFolder = "PieceSprites";
+            string fileName = Game.GetPieceName(piece) + ".png";
+            return Image.FromFile(Path.Combine(pieceFolder, fileName));
+        }
+        private void SyncBoard()
+        {
+            for (int row = 0; row < 8; row++)
+            {
+                for (int col = 0; col < 8; col++)
+                {
+                    if (_game.Board[row, col] != null)
+                    {
+                        _cells[row, col].BackgroundImage = GetPieceSprite(_game.Board[row, col]);
+                    }
+                }
+            }
+        }
+
+        private void DrawPossibleMoves(IFutureMove m, bool draw = true)
+        {
+            if (draw) //Draw green possible cells
+            {
+                if (m.Moves == null) return;
+                foreach (var move in m.Moves)
+                {
+                    _cells[move.y, move.x].BackColor = Color.Green;
+                }
+            }
+            else //Restore normal colors
+            {
+                for (int row = 0; row < 8; row++)
+                {
+                    for (int col = 0; col < 8; col++)
+                    {
+                        _cells[row, col].BackColor = ((col + row) % 2 == 0) ? Color.Beige : Color.Brown;
+                    }
+                }
+            }
+        }
         private void FillBoardDefault()
         {
             string[,] defaultLayout = new string[8, 8]
@@ -76,8 +123,10 @@ namespace Chess
                 {"", "", "", "", "", "", "", ""},
                 {"", "", "", "", "", "", "", ""},
                 {"wP", "wP", "wP", "wP", "wP", "wP", "wP", "wP"},
-                {"wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"},
+                {"wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"}
             };
+
+
 
             string pieceFolder = "PieceSprites";
             string extension = "png";
@@ -96,7 +145,15 @@ namespace Chess
 
         private void CellClick(object sender, EventArgs e)
         {
+            var btn = sender as Button;
+            var point = (Point)btn.Tag;
+            int x = point.X; //row
+            int y = point.Y; //col
 
+            _game.Move(y, x);
+
+            if (_game.Board[y, x] != null) DrawPossibleMoves(_game.Board[y, x] as IFutureMove);
+            SyncBoard();
         }
     }
 }

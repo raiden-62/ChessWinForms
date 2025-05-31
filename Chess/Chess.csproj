@@ -65,4 +65,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model\Model.csproj" />
+  </ItemGroup>
+
 </Project>
