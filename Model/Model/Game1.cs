@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -6,7 +6,6 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Model
 {
@@ -23,8 +22,6 @@ namespace Model
         }
         public Game()
         {
-            
-
             Board = new ChessPiece[8, 8];
             Board[0, 0] = new Rook(0, 0, 1); Board[7, 0] = new Rook(7, 0, -1);
             Board[0, 1] = new Knight(0, 1, 1); Board[7, 1] = new Knight(7, 1, -1);
@@ -41,41 +38,20 @@ namespace Model
             }
             ColorPlayer = 1;
         }
-        public void Move(int x,int y) //col, row
+        public void Move(int x,int y)
         {
-            if ((X1 == -1 || Y1 == -1) && Board[X1, Y1] != null && Board[x, y].Color == ColorPlayer)
+            if ((X1 == -1 || Y1 == -1) && Board[x, y] != null && Board[x, y].Color == ColorPlayer)
             {
                 X1 = x; Y1 = y; return;
             }
             Board[X1, Y1].MoveGenerator(Board);
-            Board[X1, Y1].Move(x, y,Board); 
+            Board[X1, Y1].Move(x, y,Board);
             if (Board[X1,Y1] == null)
             {
                 ColorPlayer = -ColorPlayer;
             }
             X1 = -1; Y1 = -1;
         }
-
-        //Probably violates SOLID
-        public static string GetPieceName(ChessPiece piece)
-        {
-            StringBuilder fileName = new StringBuilder("");
-
-            if (piece == null) return null;
-
-            if (piece.Color == 1) fileName.Append("w");
-            else if (piece.Color == -1) fileName.Append("b");
-
-           
-            //Shitty code, rewrite as switch expression
-            if (piece is Bishop) fileName.Append("B");
-            if (piece is Knight) fileName.Append("N");
-            if (piece is Rook) fileName.Append("R");
-            if (piece is Pawn) fileName.Append("P");
-            if (piece is Queen) fileName.Append("Q");
-            if (piece is King) fileName.Append("K");
-           
-            return fileName.ToString();
-        }
+        
     }
 }
