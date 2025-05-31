@@ -150,8 +150,7 @@ namespace Chess
             int x = point.X; //row
             int y = point.Y; //col
 
-            _game.Move(y, x);
-
+            _game.Move(x,y);
             if (_game.Board[y, x] != null) DrawPossibleMoves(_game.Board[y, x] as IFutureMove);
             SyncBoard();
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Text;
@@ -40,10 +41,16 @@ namespace Model
         }
         public void Move(int x,int y)
         {
-            if ((X1 == -1 || Y1 == -1) && Board[x, y] != null && Board[x, y].Color == ColorPlayer)
+            if ((X1 == -1 || Y1 == -1))
             {
-                X1 = x; Y1 = y; return;
+                if ((Board[x, y] != null && Board[x, y].Color == ColorPlayer))
+                {
+                    X1 = x; Y1 = y;
+                }
+                return;
             }
+            System.Diagnostics.Debug.WriteLine(x);
+            System.Diagnostics.Debug.WriteLine(y);
             Board[X1, Y1].MoveGenerator(Board);
             Board[X1, Y1].Move(x, y,Board);
             if (Board[X1,Y1] == null)
@@ -52,6 +59,18 @@ namespace Model
             }
             X1 = -1; Y1 = -1;
         }
-        
+        public static string GetPieceName(ChessPiece piece)
+        {
+            string p = "";
+            if (piece is Bishop) p = "B";
+            if (piece is Knight) p = "N";
+            if (piece is Queen) p = "Q";
+            if (piece is Pawn) p = "P";
+            if (piece is Rook) p = "R";
+            if (piece is King) p = "K";
+
+            if (piece.Color == 1) return "w" + p;
+            else return "b" + p;
+        }
     }
 }
