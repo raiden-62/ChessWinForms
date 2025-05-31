@@ -14,3 +14,8 @@ appsettings.json
 
 # Ignore log files
 *.log
+
+
+# .gitignore for C# projects
+[Bb]in/
+[Oo]bj/
