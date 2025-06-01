@@ -17,15 +17,27 @@ namespace Chess
         private Button[,] _cells;
         private const int cellSize = 45;
         private Game _game;
+        private string _folderPath;
+        private Serializer _serializer;
 
-
-        public GameForm(bool saveAsJSON, string folderPath, string extension, bool newGame = true)
+        public GameForm(string folderPath, bool isJSON, bool newGame = true)
         {
             _cells = new Button[8, 8];
             InitializeComponent();
             InitializeBoard();
-
+            _folderPath = folderPath;
             this.FormClosing += ClosingGame;
+
+
+            if (isJSON)
+            {
+                _serializer = new SerializerJSON(folderPath);
+            }
+            else
+            {
+                _serializer = new SerializerXML(folderPath);
+            }
+
 
             if (newGame)
             {
@@ -33,7 +45,7 @@ namespace Chess
             }
             else
             {
-                //fill from serialized game
+                _game = _serializer.Deserialize();
             }
             SyncBoard();
         }
@@ -134,7 +146,7 @@ namespace Chess
 
         private void ClosingGame(object sender, EventArgs e)
         {
-            //call method from Data
+            _serializer.Serialize(_game);
         }
 
         

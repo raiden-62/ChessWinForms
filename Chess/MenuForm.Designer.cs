@@ -33,6 +33,7 @@
             btnSelectFolder = new Button();
             cmbSerialization = new ComboBox();
             txtFolderPath = new TextBox();
+            txtSerializationFormat = new TextBox();
             SuspendLayout();
             // 
             // btnNewGame
@@ -43,7 +44,6 @@
             btnNewGame.TabIndex = 0;
             btnNewGame.Text = "Новая игра";
             btnNewGame.UseVisualStyleBackColor = true;
-            btnNewGame.Click += StartNewGame;
             // 
             // btnResumeGame
             // 
@@ -53,7 +53,6 @@
             btnResumeGame.TabIndex = 1;
             btnResumeGame.Text = "Продолжить игру";
             btnResumeGame.UseVisualStyleBackColor = true;
-            btnResumeGame.Click += ResumeGame;
             // 
             // btnSelectFolder
             // 
@@ -78,11 +77,20 @@
             txtFolderPath.Size = new Size(257, 23);
             txtFolderPath.TabIndex = 4;
             // 
+            // txtSerializationFormat
+            // 
+            txtSerializationFormat.Location = new Point(623, 386);
+            txtSerializationFormat.Name = "txtSerializationFormat";
+            txtSerializationFormat.Size = new Size(134, 23);
+            txtSerializationFormat.TabIndex = 5;
+            txtSerializationFormat.Text = "Формат сериализации";
+            // 
             // MenuForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 511);
+            Controls.Add(txtSerializationFormat);
             Controls.Add(txtFolderPath);
             Controls.Add(cmbSerialization);
             Controls.Add(btnSelectFolder);
@@ -102,5 +110,6 @@
         private ComboBox cmbSerializeExtension;
         private ComboBox cmbSerialization;
         private TextBox txtFolderPath;
+        private TextBox txtSerializationFormat;
     }
 }

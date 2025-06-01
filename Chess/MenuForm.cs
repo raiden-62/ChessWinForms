@@ -6,11 +6,11 @@ namespace Chess
     {
         private string _folderPath;
 
-        private string SelectedExtension
+        private bool isJSON
         {
             get
             {
-                return cmbSerialization.SelectedItem.ToString() == "XML" ? ".xml" : ".json";
+                return cmbSerialization.SelectedItem.ToString() == "JSON";
             }
         }
         public MenuForm()
@@ -18,19 +18,23 @@ namespace Chess
             InitializeComponent();
 
             btnSelectFolder.Click += SelectFolder;
+            btnResumeGame.Click += ResumeGame;
+            btnNewGame.Click += StartNewGame;
+
             InitializeSerializationComboBox();
         }
 
         private void StartNewGame(object sender, EventArgs e)
         {
-            var gameForm = new GameForm(true, _folderPath, SelectedExtension);
+            string folder = _folderPath != String.Empty ? _folderPath : Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var gameForm = new GameForm(_folderPath, isJSON);
             gameForm.Show();
             this.Hide();
         }
 
         private void ResumeGame(object sender, EventArgs e)
         {
-            var gameForm = new GameForm(false, _folderPath, SelectedExtension); //add loading previous game
+            var gameForm = new GameForm(_folderPath, isJSON, false); //add loading previous game
             gameForm.Show();
             this.Hide();
         }
