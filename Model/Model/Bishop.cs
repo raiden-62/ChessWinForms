@@ -40,7 +40,7 @@ namespace Model
             }
             x = XCoordinate - 1; y = YCoordinate + 1;
             closemove = false;
-            while (x < 8 & y > -1)
+            while (y < 8 & x > -1)
             {
                 if (closemove) break;
                 closemove = PartMoveGenerator(x, y, closemove, board);
@@ -48,7 +48,7 @@ namespace Model
             }
             x = XCoordinate - 1; y = YCoordinate - 1;
             closemove = false;
-            while (x < 8 & y > -1)
+            while (x > -1 & y > -1)
             {
                 if (closemove) break;
                 closemove = PartMoveGenerator(x, y, closemove, board);

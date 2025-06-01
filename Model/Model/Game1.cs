@@ -30,7 +30,7 @@ namespace Model
             Board[0, 3] = new Queen(0, 3, 1); Board[7, 3] = new Queen(7, 3, -1);
             Board[0, 4] = new King(0, 4, 1); Board[7, 4] = new King(7, 4, -1);
             Board[0, 5] = new Bishop(0, 5, 1); Board[7, 5] = new Bishop(7, 5, -1);
-            Board[0, 6] = new Knight(0, 6, 1); Board[7, 6] = new King(7, 6, -1);
+            Board[0, 6] = new Knight(0, 6, 1); Board[7, 6] = new Knight(7, 6, -1);
             Board[0, 7] = new Rook(0, 7, 1); Board[7, 7] = new Rook(7, 7, -1);
             for (int i = 0; i < 8; i++)
             {
@@ -50,9 +50,8 @@ namespace Model
                 }
                 return;
             }
-            System.Diagnostics.Debug.WriteLine(x);
-            System.Diagnostics.Debug.WriteLine(y);
-            //Board[X1, Y1].MoveGenerator(Board);
+            //System.Diagnostics.Debug.WriteLine(x);
+            //System.Diagnostics.Debug.WriteLine(y);
             Board[X1, Y1].Move(x, y,Board);
             if (Board[X1,Y1] == null)
             {
