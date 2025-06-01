@@ -19,11 +19,13 @@ namespace Chess
         private Game _game;
 
 
-        public GameForm(bool newGame = true)
+        public GameForm(bool saveAsJSON, string folderPath, string extension, bool newGame = true)
         {
             _cells = new Button[8, 8];
             InitializeComponent();
             InitializeBoard();
+
+            this.FormClosing += ClosingGame;
 
             if (newGame)
             {
@@ -125,9 +127,16 @@ namespace Chess
             _game.Move(x, y);
 
             if (_game.Board[x, y] != null && _game.X1 != -1) DrawPossibleMoves(_game.Board[x, y] as IFutureMove);
-            if (_game.Board[x, y] != null && _game.X1 == -1) DrawPossibleMoves(null, false);
+            if (_game.X1 == -1) DrawPossibleMoves(null, false);
 
             SyncBoard();
         }
+
+        private void ClosingGame(object sender, EventArgs e)
+        {
+            //call method from Data
+        }
+
+        
     }
 }

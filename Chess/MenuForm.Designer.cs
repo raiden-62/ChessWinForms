@@ -30,8 +30,9 @@
         {
             btnNewGame = new Button();
             btnResumeGame = new Button();
-            button3 = new Button();
-            cmbSerializeExtension = new ComboBox();
+            btnSelectFolder = new Button();
+            cmbSerialization = new ComboBox();
+            txtFolderPath = new TextBox();
             SuspendLayout();
             // 
             // btnNewGame
@@ -54,47 +55,52 @@
             btnResumeGame.UseVisualStyleBackColor = true;
             btnResumeGame.Click += ResumeGame;
             // 
-            // button3
+            // btnSelectFolder
             // 
-            button3.Location = new Point(430, 400);
-            button3.Name = "button3";
-            button3.Size = new Size(150, 50);
-            button3.TabIndex = 2;
-            button3.Text = "Выбрать папку";
-            button3.UseVisualStyleBackColor = true;
+            btnSelectFolder.Location = new Point(430, 400);
+            btnSelectFolder.Name = "btnSelectFolder";
+            btnSelectFolder.Size = new Size(150, 50);
+            btnSelectFolder.TabIndex = 2;
+            btnSelectFolder.Text = "Выбрать папку";
+            btnSelectFolder.UseVisualStyleBackColor = true;
             // 
-            // cmbSerializeExtension
+            // cmbSerialization
             // 
-            cmbSerializeExtension.DropDownHeight = 115;
-            cmbSerializeExtension.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            cmbSerializeExtension.FormattingEnabled = true;
-            cmbSerializeExtension.IntegralHeight = false;
-            cmbSerializeExtension.Items.AddRange(new object[] { "JSON", "XML" });
-            cmbSerializeExtension.Location = new Point(600, 413);
-            cmbSerializeExtension.Name = "cmbSerializeExtension";
-            cmbSerializeExtension.Size = new Size(158, 25);
-            cmbSerializeExtension.TabIndex = 3;
-            cmbSerializeExtension.Text = "Формат сериализации";
+            cmbSerialization.Location = new Point(623, 415);
+            cmbSerialization.Name = "cmbSerialization";
+            cmbSerialization.Size = new Size(121, 23);
+            cmbSerialization.TabIndex = 3;
+            // 
+            // txtFolderPath
+            // 
+            txtFolderPath.Location = new Point(375, 456);
+            txtFolderPath.Name = "txtFolderPath";
+            txtFolderPath.Size = new Size(257, 23);
+            txtFolderPath.TabIndex = 4;
             // 
             // MenuForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 511);
-            Controls.Add(cmbSerializeExtension);
-            Controls.Add(button3);
+            Controls.Add(txtFolderPath);
+            Controls.Add(cmbSerialization);
+            Controls.Add(btnSelectFolder);
             Controls.Add(btnResumeGame);
             Controls.Add(btnNewGame);
             Name = "MenuForm";
             Text = "Chess Menu";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button btnNewGame;
         private Button btnResumeGame;
-        private Button button3;
+        private Button btnSelectFolder;
         private ComboBox cmbSerializeExtension;
+        private ComboBox cmbSerialization;
+        private TextBox txtFolderPath;
     }
 }
