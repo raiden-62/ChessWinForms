@@ -13,7 +13,20 @@ namespace Model
         {
             base.MoveGenerator(board);
             bool closemove = false;
-            for (int x = XCoordinate; x< 8; x++)
+            for (int x = XCoordinate+1; x< 8; x++)
+            {
+                if (closemove) break;
+                System.Diagnostics.Debug.WriteLine(x);
+                System.Diagnostics.Debug.WriteLine(YCoordinate);
+                if (board[x, YCoordinate] == null) Add(x, YCoordinate);
+                else
+                {
+                    closemove = true;
+                    if (board[x, YCoordinate].Color != Color) Add(x, YCoordinate);
+                }
+            }
+            closemove = false;
+            for (int x = XCoordinate-1; x >-1; x--)
             {
                 if (closemove) break;
                 if (board[x, YCoordinate] == null) Add(x, YCoordinate);
@@ -24,18 +37,7 @@ namespace Model
                 }
             }
             closemove = false;
-            for (int x = XCoordinate; x >-1; x--)
-            {
-                if (closemove) break;
-                if (board[x, YCoordinate] == null) Add(x, YCoordinate);
-                else
-                {
-                    closemove = true;
-                    if (board[x, YCoordinate].Color != Color) Add(x, YCoordinate);
-                }
-            }
-            closemove = false;
-            for (int y = YCoordinate; y < 8; y++)
+            for (int y = YCoordinate+1; y < 8; y++)
             {
                 if (closemove) break;
                 if (board[XCoordinate,y] == null) Add(XCoordinate, y);
@@ -46,7 +48,7 @@ namespace Model
                 }
             }
             closemove = false;
-            for (int y = YCoordinate; y >-1; y--)
+            for (int y = YCoordinate-1; y >-1; y--)
             {
                 if (closemove) break;
                 if (board[XCoordinate, y] == null) Add(XCoordinate, y);

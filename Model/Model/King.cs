@@ -19,11 +19,13 @@ namespace Model
             }
             if (FirstMove)
             {
-                if (board[XCoordinate, YCoordinate - 4].FirstMove && IsBrokenField(board,XCoordinate,YCoordinate) &&
-                    IsBrokenField(board,XCoordinate,YCoordinate-1) && IsBrokenField(board,XCoordinate,YCoordinate-2) && IsBrokenField(board,XCoordinate,YCoordinate-3))
+                if (board[XCoordinate, YCoordinate - 4] != null && board[XCoordinate, YCoordinate - 4].FirstMove && !IsBrokenField(board, XCoordinate, YCoordinate) &&
+                    !IsBrokenField(board, XCoordinate, YCoordinate - 1) && board[XCoordinate, YCoordinate - 1] == null && !IsBrokenField(board, XCoordinate, YCoordinate - 2) &&
+                    board[XCoordinate, YCoordinate - 2] == null && !IsBrokenField(board, XCoordinate, YCoordinate - 3) && board[XCoordinate, YCoordinate - 3] == null)
                     Add(XCoordinate, YCoordinate - 2);
-                if (board[XCoordinate, YCoordinate +3].FirstMove && IsBrokenField(board, XCoordinate, YCoordinate) &&
-                    IsBrokenField(board, XCoordinate, YCoordinate + 1) && IsBrokenField(board, XCoordinate, YCoordinate + 2))
+                if (board[XCoordinate, YCoordinate + 3] != null && board[XCoordinate, YCoordinate + 3].FirstMove && !IsBrokenField(board, XCoordinate, YCoordinate) &&
+                    !IsBrokenField(board, XCoordinate, YCoordinate + 1) && board[ XCoordinate, YCoordinate + 1] == null && !IsBrokenField(board, XCoordinate, YCoordinate + 2) &&
+                    board[ XCoordinate, YCoordinate + 2] == null)
                     Add(XCoordinate, YCoordinate +2);
             }
         }
@@ -52,7 +54,7 @@ namespace Model
             {
                 for (int j = 0; j<8; j++)
                 {
-                    if (board[i,j]!= null && board[x,y].Color != Color)
+                    if (board[i,j]!= null && board[i,j].Color != Color)
                     {
                         // Проверка нет ли рядом короля
                         if (board[i, j] is King)

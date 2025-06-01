@@ -20,10 +20,10 @@ namespace Model
                 if (FirstMove && board[XCoordinate+Color*2, YCoordinate] == null)
                     Add(XCoordinate+Color*2, YCoordinate);
             }
-            if (YCoordinate != 7 && board[XCoordinate+Color, YCoordinate+1] != null)
-                Add(XCoordinate + 1, YCoordinate + Color);
-            if (YCoordinate != 0 && board[XCoordinate + Color, YCoordinate - 1] != null)
-                Add(XCoordinate - 1, YCoordinate + Color);
+            if (YCoordinate != 7 && board[XCoordinate+Color, YCoordinate+1] != null && board[XCoordinate + Color, YCoordinate + 1].Color != Color)
+                Add(XCoordinate + Color, YCoordinate +1);
+            if (YCoordinate != 0 && board[XCoordinate + Color, YCoordinate - 1] != null && board[XCoordinate + Color, YCoordinate - 1].Color != Color)
+                Add(XCoordinate +Color, YCoordinate - 1);
         }
         public override string ToString()
         {

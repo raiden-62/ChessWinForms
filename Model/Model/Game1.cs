@@ -50,9 +50,8 @@ namespace Model
                 }
                 return;
             }
-            System.Diagnostics.Debug.WriteLine(x);
-            System.Diagnostics.Debug.WriteLine(y);
-            //Board[X1, Y1].MoveGenerator(Board);
+            //System.Diagnostics.Debug.WriteLine(x);
+            //System.Diagnostics.Debug.WriteLine(y);
             Board[X1, Y1].Move(x, y,Board);
             if (Board[X1,Y1] == null)
             {

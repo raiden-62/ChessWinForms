@@ -40,7 +40,7 @@ namespace Model
             }
             x = XCoordinate - 1; y = YCoordinate + 1;
             closemove = false;
-            while (x < 8 & y > -1)
+            while (y < 8 & x > -1)
             {
                 if (closemove) break;
                 closemove = PartMoveGenerator(x, y, closemove,board);
@@ -48,14 +48,27 @@ namespace Model
             }
             x = XCoordinate - 1; y = YCoordinate - 1;
             closemove = false;
-            while (x < 8 & y > -1)
+            while (x > -1 & y > -1)
             {
                 if (closemove) break;
                 closemove = PartMoveGenerator(x, y, closemove, board);
                 x--; y--;
             }
             closemove = false;
-            for (x = XCoordinate; x < 8; x++)
+            for (x = XCoordinate + 1; x < 8; x++)
+            {
+                if (closemove) break;
+                System.Diagnostics.Debug.WriteLine(x);
+                System.Diagnostics.Debug.WriteLine(YCoordinate);
+                if (board[x, YCoordinate] == null) Add(x, YCoordinate);
+                else
+                {
+                    closemove = true;
+                    if (board[x, YCoordinate].Color != Color) Add(x, YCoordinate);
+                }
+            }
+            closemove = false;
+            for (x = XCoordinate - 1; x > -1; x--)
             {
                 if (closemove) break;
                 if (board[x, YCoordinate] == null) Add(x, YCoordinate);
@@ -66,18 +79,7 @@ namespace Model
                 }
             }
             closemove = false;
-            for ( x = XCoordinate; x > -1; x--)
-            {
-                if (closemove) break;
-                if (board[x, YCoordinate] == null) Add(x, YCoordinate);
-                else
-                {
-                    closemove = true;
-                    if (board[x, YCoordinate].Color != Color) Add(x, YCoordinate);
-                }
-            }
-            closemove = false;
-            for ( y = YCoordinate; y < 8; y++)
+            for ( y = YCoordinate + 1; y < 8; y++)
             {
                 if (closemove) break;
                 if (board[XCoordinate, y] == null) Add(XCoordinate, y);
@@ -88,7 +90,7 @@ namespace Model
                 }
             }
             closemove = false;
-            for ( y = YCoordinate; y > -1; y--)
+            for ( y = YCoordinate - 1; y > -1; y--)
             {
                 if (closemove) break;
                 if (board[XCoordinate, y] == null) Add(XCoordinate, y);
