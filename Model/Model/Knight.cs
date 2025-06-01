@@ -30,5 +30,9 @@ namespace Model
             if (-1 < x && x < 8 && -1 < y && y < 8 && board[x, y] != null && board[x, y].Color != Color) Add(x, y);
            
         }
+        public override string ToString()
+        {
+            return (Color == 1 ? "wN" : "bN");
+        }
     }
 }

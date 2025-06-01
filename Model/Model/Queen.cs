@@ -99,5 +99,9 @@ namespace Model
                 }
             }
         }
+        public override string ToString()
+        {
+            return (Color == 1 ? "wQ" : "bQ");
+        }
     }
 }

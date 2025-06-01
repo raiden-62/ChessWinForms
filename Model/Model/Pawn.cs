@@ -25,6 +25,10 @@ namespace Model
             if (YCoordinate != 0 && board[XCoordinate + Color, YCoordinate - 1] != null)
                 Add(XCoordinate - 1, YCoordinate + Color);
         }
+        public override string ToString()
+        {
+            return (Color == 1 ? "wP" : "bP");
+        }
 
     }
 }

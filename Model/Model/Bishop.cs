@@ -55,5 +55,9 @@ namespace Model
                 x--; y--;
             }
         }
+        public override string ToString()
+        {
+            return (Color == 1 ? "wB" : "bB");
+        }
     }
 }

@@ -18,7 +18,6 @@ namespace Chess
         private const int cellSize = 45;
         private Game _game;
 
-        private int[] chosenCell = new int[2] { -1, -1 }; //row, col
 
         public GameForm(bool newGame = true)
         {
@@ -74,7 +73,7 @@ namespace Chess
         public Image GetPieceSprite(ChessPiece piece)
         {
             string pieceFolder = "PieceSprites";
-            string fileName = Game.GetPieceName(piece) + ".png";
+            string fileName = piece.ToString() + ".png";
             return Image.FromFile(Path.Combine(pieceFolder, fileName));
         }
         private void SyncBoard()
@@ -113,36 +112,6 @@ namespace Chess
                     {
                         _cells[row, col].BackColor = ((col + row) % 2 == 0) ? Color.Beige : Color.Brown;
                     }
-                }
-            }
-        }
-        private void FillBoardDefault()
-        {
-            string[,] defaultLayout = new string[8, 8]
-            {
-                {"bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"},
-                {"bP", "bP", "bP", "bP", "bP", "bP", "bP", "bP"},
-                {"", "", "", "", "", "", "", ""},
-                {"", "", "", "", "", "", "", ""},
-                {"", "", "", "", "", "", "", ""},
-                {"", "", "", "", "", "", "", ""},
-                {"wP", "wP", "wP", "wP", "wP", "wP", "wP", "wP"},
-                {"wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"}
-            };
-
-
-
-            string pieceFolder = "PieceSprites";
-            string extension = "png";
-
-            for (int row = 0; row < 8; row++)
-            {
-                for (int col = 0; col < 8; col++)
-                {
-                    if (defaultLayout[row, col] == String.Empty) continue;
-
-                    string fileName = Path.Combine(pieceFolder, defaultLayout[row, col] + "." + extension);
-                    _cells[row, col].BackgroundImage = Image.FromFile(fileName);
                 }
             }
         }
