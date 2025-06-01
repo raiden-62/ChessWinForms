@@ -9,17 +9,18 @@ namespace Model
 {
     public class ChessPieceDTO
     {
-        public string Type {  get; set; }
+        public string Type { get; set; }
         public int Row { get; set; }
         public int Column { get; set; }
         public bool FirstMove { get; set; }
         public int Color { get; set; }
 
         public ChessPieceDTO() { }
-        public ChessPieceDTO(ChessPiece piece) { 
-            
+        public ChessPieceDTO(ChessPiece piece)
+        {
+
             Type = piece.GetType().ToString();
-            Row = piece.XCoordinate; 
+            Row = piece.XCoordinate;
             Column = piece.YCoordinate;
             FirstMove = piece.FirstMove;
             Color = piece.Color;
@@ -32,14 +33,15 @@ namespace Model
         public ChessPieceDTO[] Board2D { get; set; }
         public int ColorPlayer { get; set; }
         public ChessGameDTO() { }
-        public ChessGameDTO(Game game) {
+        public ChessGameDTO(Game game)
+        {
             ColorPlayer = game.ColorPlayer;
-            Board2D = new ChessPieceDTO[64];    
-            for (int row = 0;  row < 8; row++)
+            Board2D = new ChessPieceDTO[64];
+            for (int row = 0; row < 8; row++)
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    if (game.Board[row, col] != null) Board2D[row*8+ col] = new ChessPieceDTO(game.Board[row, col]);
+                    if (game.Board[row, col] != null) Board2D[row * 8 + col] =   new ChessPieceDTO(game.Board[row, col]);
                 }
             }
         }
@@ -98,6 +100,6 @@ namespace Model
             return game;
         }
 
-        
+
     }
 }
