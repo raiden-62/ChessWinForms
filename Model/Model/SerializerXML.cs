@@ -36,12 +36,12 @@ namespace Model
         public ChessGameDTO(Game game)
         {
             ColorPlayer = game.ColorPlayer;
-            Board2D = new ChessPieceDTO[64];
+            Board2D = new ChessPieceDTO[64]; //flattened board
             for (int row = 0; row < 8; row++)
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    if (game.Board[row, col] != null) Board2D[row * 8 + col] =   new ChessPieceDTO(game.Board[row, col]);
+                    if (game.Board[row, col] != null) Board2D[row * 8 + col] = new ChessPieceDTO(game.Board[row, col]);
                 }
             }
         }
@@ -53,12 +53,7 @@ namespace Model
     {
         protected override string Extension => ".xml";
 
-
-
-        public SerializerXML(string folderPath) : base(folderPath)
-        {
-        }
-
+        public SerializerXML(string folderPath) : base(folderPath) { }
 
 
         public override void Serialize(Game game)

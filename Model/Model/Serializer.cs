@@ -16,6 +16,7 @@ namespace Model
         {
             get
             {
+                if (_folderPath == null) return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), _filename+ Extension);
                 return Path.Combine(_folderPath, _filename + Extension);
             }
         }

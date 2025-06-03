@@ -6,13 +6,9 @@ namespace Chess
     {
         private string _folderPath;
 
-        private bool isJSON
-        {
-            get
-            {
-                return cmbSerialization.SelectedItem.ToString() == "JSON";
-            }
-        }
+        private bool isJSON => cmbSerialization.SelectedItem.ToString() == "JSON";
+            
+        
         public MenuForm()
         {
             InitializeComponent();
@@ -26,7 +22,7 @@ namespace Chess
 
         private void StartNewGame(object sender, EventArgs e)
         {
-            string folder = _folderPath != String.Empty ? _folderPath : Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string folder = _folderPath;
             var gameForm = new GameForm(_folderPath, isJSON);
             gameForm.Show();
             this.Hide();
