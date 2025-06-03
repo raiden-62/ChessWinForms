@@ -35,7 +35,7 @@ namespace Chess
 
             if (newGame) _game = new Game();
             else _game = _serializer.Deserialize();
-            
+
             SyncBoard();
         }
 
@@ -81,13 +81,13 @@ namespace Chess
         }
         private void SyncBoard()
         {
-            for (int row = 0; row <8; row++)
+            for (int row = 0; row < 8; row++)
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    if (_game.Board[7-row, col] != null)
+                    if (_game.Board[7 - row, col] != null)
                     {
-                        _cells[row, col].BackgroundImage = GetPieceSprite(_game.Board[7-row, col]);
+                        _cells[row, col].BackgroundImage = GetPieceSprite(_game.Board[7 - row, col]);
                     }
                     else
                     {
@@ -104,7 +104,7 @@ namespace Chess
                 if (m == null || m.Moves == null) return;
                 foreach (var move in m.Moves)
                 {
-                    _cells[7-move.x, move.y].BackColor = Color.Green;
+                    _cells[7 - move.x, move.y].BackColor = Color.Green;
                 }
             }
             else //Restore normal colors
@@ -125,12 +125,27 @@ namespace Chess
             var point = (Point)btn.Tag;
             int x = point.X; //row
             int y = point.Y; //col
-            int gameState = _game.Move(7-x, y);
+            int gameState = _game.Move(7 - x, y);
 
-            if (_game.Board[7-x, y] != null && _game.X1 != -1) DrawPossibleMoves(_game.Board[7 - x, y] as IFutureMove); //draw possible moves
+            if (_game.Board[7 - x, y] != null && _game.X1 != -1) DrawPossibleMoves(_game.Board[7 - x, y] as IFutureMove); //draw possible moves
             else if (_game.X1 == -1) DrawPossibleMoves(null, false); //erase possible moves 
 
-
+            if (gameState != 0)
+            {
+                string message = "";
+                switch (gameState)
+                {
+                    case -1:
+                        message = "Победа черных!"; break;
+                    case 1:
+                        message = "Победа белых!"; break;
+                    case 2:
+                        message = "Ничья."; break;     
+                    case 3:
+                        message = "Шах!"; break;
+                }
+                MessageBox.Show(message);
+            }
 
             SyncBoard();
         }
