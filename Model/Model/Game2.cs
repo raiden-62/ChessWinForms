@@ -43,7 +43,7 @@ namespace Model
             return false;
         }
 
-        public bool IsCheck()
+        private bool IsCheck()
         {
             (int kingX, int kingY) = PosKing();
             return IsSquareUnderAttack(kingX, kingY);
@@ -81,12 +81,12 @@ namespace Model
             }
             return false;
         }
-        public bool IsCheckmate()
+        private bool IsCheckmate()
         {
             return IsCheck() && !HasAnyValidMoves();
         }
 
-        public bool IsStalemate()
+        private bool IsStalemate()
         {
             return !IsCheck() && !HasAnyValidMoves();
         }
