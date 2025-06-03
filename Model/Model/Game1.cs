@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace Model
             Board[0, 3] = new Queen(0, 3, 1); Board[7, 3] = new Queen(7, 3, -1);
             Board[0, 4] = new King(0, 4, 1); Board[7, 4] = new King(7, 4, -1);
             Board[0, 5] = new Bishop(0, 5, 1); Board[7, 5] = new Bishop(7, 5, -1);
-            Board[0, 6] = new Knight(0, 6, 1); Board[7, 6] = new Knight(7, 6, -1);
+            Board[0, 6] = new Knight(0, 6, 1); Board[7, 6] = new Knight(7, 6,- 1);
             Board[0, 7] = new Rook(0, 7, 1); Board[7, 7] = new Rook(7, 7, -1);
             for (int i = 0; i < 8; i++)
             {
@@ -39,7 +40,7 @@ namespace Model
             }
             ColorPlayer = 1;
         }
-        public void Move(int x,int y)
+        public int Move(int x,int y)
         {
             if ((X1 == -1 || Y1 == -1))
             {
@@ -48,7 +49,7 @@ namespace Model
                     X1 = x; Y1 = y;
                     Board[X1, Y1].MoveGenerator(Board); //Ходы должны генерироваться при первом клике 
                 }
-                return;
+                return 0;
             }
             //System.Diagnostics.Debug.WriteLine(x);
             //System.Diagnostics.Debug.WriteLine(y);
@@ -56,8 +57,11 @@ namespace Model
             if (Board[X1,Y1] == null)
             {
                 ColorPlayer = -ColorPlayer;
+                X1 = -1; Y1 = -1;
+                return CheckGame();
             }
             X1 = -1; Y1 = -1;
+            return 0;
         }
         
     }

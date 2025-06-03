@@ -125,7 +125,7 @@ namespace Chess
             var point = (Point)btn.Tag;
             int x = point.X; //row
             int y = point.Y; //col
-            _game.Move(x, y);
+            int resultMove = _game.Move(x, y);
 
             if (_game.Board[x, y] != null && _game.X1 != -1) DrawPossibleMoves(_game.Board[x, y] as IFutureMove);
             if (_game.X1 == -1) DrawPossibleMoves(null, false);

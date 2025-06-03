@@ -31,5 +31,10 @@
         {
             Moves.Add((x, y));
         }
+        internal void VirtualMove(int x,int y)
+        {
+            XCoordinate = x;
+            YCoordinate = y;
+        }
     }
 }

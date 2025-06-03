@@ -16,8 +16,6 @@ namespace Model
             for (int x = XCoordinate+1; x< 8; x++)
             {
                 if (closemove) break;
-                System.Diagnostics.Debug.WriteLine(x);
-                System.Diagnostics.Debug.WriteLine(YCoordinate);
                 if (board[x, YCoordinate] == null) Add(x, YCoordinate);
                 else
                 {
