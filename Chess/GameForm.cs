@@ -22,31 +22,20 @@ namespace Chess
 
         public GameForm(string folderPath, bool isJSON, bool newGame = true)
         {
-            _cells = new Button[8, 8];
             InitializeComponent();
+
+            _cells = new Button[8, 8];
             InitializeBoard();
+
             _folderPath = folderPath;
+            if (isJSON) _serializer = new SerializerJSON(folderPath);
+            else _serializer = new SerializerXML(folderPath);
             this.FormClosing += ClosingGame;
 
 
-            if (isJSON)
-            {
-                _serializer = new SerializerJSON(folderPath);
-            }
-            else
-            {
-                _serializer = new SerializerXML(folderPath);
-            }
-
-
-            if (newGame)
-            {
-                _game = new Game();
-            }
-            else
-            {
-                _game = _serializer.Deserialize();
-            }
+            if (newGame) _game = new Game();
+            else _game = _serializer.Deserialize();
+            
             SyncBoard();
         }
 
@@ -112,7 +101,7 @@ namespace Chess
         {
             if (draw) //Draw green possible cells
             {
-                if (m==null || m.Moves == null) return;
+                if (m == null || m.Moves == null) return;
                 foreach (var move in m.Moves)
                 {
                     _cells[move.x, move.y].BackColor = Color.Green;
@@ -149,6 +138,6 @@ namespace Chess
             _serializer.Serialize(_game);
         }
 
-        
+
     }
 }

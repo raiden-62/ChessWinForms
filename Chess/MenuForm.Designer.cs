@@ -76,6 +76,8 @@
             txtFolderPath.Name = "txtFolderPath";
             txtFolderPath.Size = new Size(257, 23);
             txtFolderPath.TabIndex = 4;
+            txtFolderPath.Text = "Папка для сериализации";
+            txtFolderPath.TextAlign = HorizontalAlignment.Center;
             // 
             // txtSerializationFormat
             // 
