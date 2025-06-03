@@ -92,7 +92,7 @@ namespace Model
         }
 
         // Проверяет окончание игры (мат или пат) и шах
-        public int CheckGameEnd()
+        private int CheckGame()
         {
             if (IsCheckmate())
             {
@@ -100,13 +100,13 @@ namespace Model
             }
             else if (IsStalemate())
             {
-                return 0; // Ничья
+                return 2; // Ничья
             }
             else if (IsCheck())
             {
-                return 2; // Шах
+                return 3; // Шах
             }
-            return 3; // Игра продолжается
+            return 0; // Игра продолжается
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Model
             }
             ColorPlayer = 1;
         }
-        public void Move(int x,int y)
+        public int Move(int x,int y)
         {
             if ((X1 == -1 || Y1 == -1))
             {
@@ -49,7 +49,7 @@ namespace Model
                     X1 = x; Y1 = y;
                     Board[X1, Y1].MoveGenerator(Board); //Ходы должны генерироваться при первом клике 
                 }
-                return;
+                return 0;
             }
             //System.Diagnostics.Debug.WriteLine(x);
             //System.Diagnostics.Debug.WriteLine(y);
@@ -57,8 +57,11 @@ namespace Model
             if (Board[X1,Y1] == null)
             {
                 ColorPlayer = -ColorPlayer;
+                X1 = -1; Y1 = -1;
+                return CheckGame();
             }
             X1 = -1; Y1 = -1;
+            return 0;
         }
         
     }

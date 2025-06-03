@@ -9,8 +9,6 @@
         public bool FirstMove { get; private set; }
         public virtual void Move(int x, int y, ChessPiece[,] board)
         {
-            System.Diagnostics.Debug.WriteLine(x);
-            System.Diagnostics.Debug.WriteLine(y);
             if (Moves.Contains((x, y)))
             {
                 int oldx = XCoordinate, oldy = YCoordinate = YCoordinate;
