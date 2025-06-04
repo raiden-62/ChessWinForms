@@ -125,32 +125,42 @@ namespace Chess
             int y = point.Y; //col
             int flippedRow = 7 - x;
 
-            int gameState = _game.Move(flippedRow, y);
+             _game.Move(flippedRow, y);
 
             if (_game.Board[flippedRow, y] != null && _game.X1 != -1) DrawPossibleMoves(_game.Board[flippedRow, y] as IFutureMove); //draw possible moves
             else if (_game.X1 == -1) DrawPossibleMoves(null, false); //erase possible moves 
 
             SyncBoard();
 
-            if (gameState != 0)
+            if (_game != 0)
             {
                 string message = "";
-                switch (gameState)
+                if (_game == -1)
                 {
-                    case -1:
-                        message = "Победа черных."; break;
-                    case 1:
-                        message = "Победа белых."; break;
-                    case 2:
-                        message = "Ничья."; break;
-                    case 3:
-                        if (_game.ColorPlayer == 1) message = "Шах белому королю!";
-                        else message = "Шах черному королю!";
-                        break;
+                    message = "Победа черных.";
+                }
+                else if (_game == 1)
+                {
+                    message = "Победа белых.";
+                }
+                else if (_game == 2)
+                {
+                    message = "Ничья.";
+                }
+                else if (_game == 3)
+                {
+                    if (_game.ColorPlayer == 1)
+                    {
+                        message = "Шах белому королю!";
+                    }
+                    else
+                    {
+                        message = "Шах черному королю!";
+                    }
                 }
                 MessageBox.Show(message);
             }
-            if (gameState == 1 || gameState == -1)
+            if (_game == 1 || _game == -1)
             {
                 this.Close();
             }
