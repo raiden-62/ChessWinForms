@@ -98,7 +98,7 @@ namespace Model
             {
                 return -ColorPlayer; // Победа противника
             }
-            else if (IsStalemate())
+            else if (IsStalemate() || IsStalemate0())
             {
                 return 2; // Ничья
             }
