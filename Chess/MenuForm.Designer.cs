@@ -85,6 +85,7 @@
             // 
             txtSerializationFormat.Location = new Point(623, 386);
             txtSerializationFormat.Name = "txtSerializationFormat";
+            txtSerializationFormat.ReadOnly = true;
             txtSerializationFormat.Size = new Size(134, 23);
             txtSerializationFormat.TabIndex = 5;
             txtSerializationFormat.Text = "Формат сериализации";
