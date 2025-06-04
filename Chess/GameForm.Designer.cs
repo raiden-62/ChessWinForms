@@ -37,7 +37,6 @@
             GamePanel.Name = "GamePanel";
             GamePanel.Size = new Size(480, 480);
             GamePanel.TabIndex = 0;
-            //GamePanel.Paint += GamePanel_Paint;
             // 
             // GameForm
             // 
@@ -46,7 +45,7 @@
             ClientSize = new Size(784, 511);
             Controls.Add(GamePanel);
             Name = "GameForm";
-            Text = "Chess";
+            Text = "Шахматы";
             ResumeLayout(false);
         }
 

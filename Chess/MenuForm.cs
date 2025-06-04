@@ -62,7 +62,7 @@ namespace Chess
             var folderDialog = new FolderBrowserDialog()
             {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                Description = "Select a folder",
+                Description = "Выберите папку для сохранения",
                 UseDescriptionForTitle = true //uses this^ for title
             };
 
@@ -74,7 +74,7 @@ namespace Chess
         }
         private void SelectFile(object sender, EventArgs e)
         {
-            string title = "Select a File";
+            string title = "Выберите файл сохраненной игры";
             string filter = "All Files|*.*"; 
             string initialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             using (var openFileDialog = new OpenFileDialog())

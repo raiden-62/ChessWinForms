@@ -73,9 +73,10 @@
             // 
             // txtFolderPath
             // 
-            txtFolderPath.Location = new Point(375, 456);
+            txtFolderPath.Location = new Point(313, 456);
             txtFolderPath.Name = "txtFolderPath";
-            txtFolderPath.Size = new Size(257, 23);
+            txtFolderPath.ReadOnly = true;
+            txtFolderPath.Size = new Size(374, 23);
             txtFolderPath.TabIndex = 4;
             txtFolderPath.Text = "Выбранный файл";
             txtFolderPath.TextAlign = HorizontalAlignment.Center;
@@ -100,7 +101,7 @@
             Controls.Add(btnResumeGame);
             Controls.Add(btnNewGame);
             Name = "MenuForm";
-            Text = "Chess Menu";
+            Text = "Шахматы";
             ResumeLayout(false);
             PerformLayout();
         }
