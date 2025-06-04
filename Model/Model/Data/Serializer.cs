@@ -35,7 +35,17 @@ namespace Model
             if ((isJson && ext != ".json") || (!isJson && ext != ".xml")) return false;
             if (Path.GetFileNameWithoutExtension(filePath) != _filename) return false;
 
-            //check the contents of the file?
+            Serializer serializer = isJson ? new SerializerJSON(Path.GetDirectoryName(filePath)) : new SerializerXML(Path.GetDirectoryName(filePath));
+            try
+            {
+                var game = serializer.Deserialize();
+                if (game == null) return false;
+                //if (game.Move(0,0) == -1 || game.Move(0, 0) == 1) return false;
+            }
+            catch
+            {
+                return false;
+            }
 
             return true;
         }
