@@ -29,5 +29,15 @@ namespace Model
         public abstract void Serialize(Game game);
         public abstract Game Deserialize();
 
+        public static bool IsFileValid(string filePath, bool isJson)
+        {
+            var ext = Path.GetExtension(filePath);
+            if ((isJson && ext != ".json") || (!isJson && ext != ".xml")) return false;
+            if (Path.GetFileNameWithoutExtension(filePath) != _filename) return false;
+
+            //check the contents of the file?
+
+            return true;
+        }
     }
 }

@@ -47,6 +47,7 @@
             // 
             // btnResumeGame
             // 
+            btnResumeGame.Enabled = false;
             btnResumeGame.Location = new Point(300, 260);
             btnResumeGame.Name = "btnResumeGame";
             btnResumeGame.Size = new Size(200, 50);

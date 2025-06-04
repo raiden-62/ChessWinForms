@@ -1,3 +1,4 @@
+using Model;
 using System.Data;
 using System.Windows.Forms;
 
@@ -14,7 +15,6 @@ namespace Chess
         {
             InitializeComponent();
 
-            //btnSelectFolder.Click += SelectFolder;
             btnResumeGame.Click += ResumeGame;
             btnNewGame.Click += SelectFolder;
             btnNewGame.Click += StartNewGame;
@@ -88,6 +88,12 @@ namespace Chess
 
                 }
             }
+
+
+            btnResumeGame.Enabled = Serializer.IsFileValid(_filePath, isJSON);
+            
+            
+
         }
     }
 }
