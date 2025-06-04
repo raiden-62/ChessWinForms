@@ -32,10 +32,12 @@ namespace Model
     {
         public ChessPieceDTO[] Board2D { get; set; }
         public int ColorPlayer { get; set; }
+        public int GameState {  get; set; }
         public ChessGameDTO() { }
         public ChessGameDTO(Game game)
         {
             ColorPlayer = game.ColorPlayer;
+            GameState = game.PosGame;
             Board2D = new ChessPieceDTO[64]; //flattened board
             for (int row = 0; row < 8; row++)
             {
@@ -91,8 +93,7 @@ namespace Model
                 }
             }
 
-            Game game = new Game(board, dto.ColorPlayer);
-            return game;
+            return new Game(board, dto.ColorPlayer, dto.GameState);
         }
 
 

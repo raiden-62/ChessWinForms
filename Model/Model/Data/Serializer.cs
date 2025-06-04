@@ -40,7 +40,7 @@ namespace Model
             {
                 var game = serializer.Deserialize();
                 if (game == null) return false;
-                //if (game.Move(0,0) == -1 || game.Move(0, 0) == 1) return false;
+                if (game == -1 || game == 1) return false;
             }
             catch
             {

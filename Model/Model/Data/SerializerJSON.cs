@@ -48,7 +48,7 @@ namespace Model
                 }
             }
 
-            return new Game(board, dto.ColorPlayer);
+            return new Game(board, dto.ColorPlayer, dto.GameState);
         }
     }
 }

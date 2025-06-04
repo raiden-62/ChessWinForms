@@ -17,10 +17,11 @@ namespace Model
         public int ColorPlayer { get; private set; }
         public int X1 { get; private set; } = -1;
         public int Y1 { get; private set; } = -1;
-        public Game(ChessPiece[,] board, int colorplayer)
+        public Game(ChessPiece[,] board, int colorplayer, int gameState)
         {
             Board = board;
             ColorPlayer = colorplayer;
+            PosGame = gameState;
         }
         public Game()
         {

@@ -125,7 +125,7 @@ namespace Chess
             int y = point.Y; //col
             int flippedRow = 7 - x;
 
-             _game.Move(flippedRow, y);
+            _game.Move(flippedRow, y);
 
             if (_game.Board[flippedRow, y] != null && _game.X1 != -1) DrawPossibleMoves(_game.Board[flippedRow, y] as IFutureMove); //draw possible moves
             else if (_game.X1 == -1) DrawPossibleMoves(null, false); //erase possible moves 
