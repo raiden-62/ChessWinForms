@@ -9,7 +9,7 @@ namespace Model
     internal class King : ChessPiece
     {
         public King(int x, int y, int color, bool firstmove = true) : base(x, y, color, firstmove) { }
-        public override void MoveGenerator(ChessPiece[,] board)
+        public override void MoveGenerator<T>(T[,] board)
         {
             base.MoveGenerator(board);
             for (int x = XCoordinate-1; x <=XCoordinate+1;x++)
@@ -29,7 +29,7 @@ namespace Model
                     Add(XCoordinate, YCoordinate +2);
             }
         }
-        public override void Move(int x, int y, ChessPiece[,] board)
+        public override void Move<T>(int x, int y, T[,] board)
         {
             if (Moves.Contains((x, y)))
             {

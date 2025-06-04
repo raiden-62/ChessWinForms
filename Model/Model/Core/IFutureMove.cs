@@ -9,6 +9,6 @@ namespace Model
     public interface IFutureMove
     {
         public List<(int x, int y)> Moves { get; }
-        public void MoveGenerator(ChessPiece[,] board);
+        public void MoveGenerator<T>(T[,] board) where T : ChessPiece;
     }
 }

@@ -9,7 +9,7 @@ namespace Model
     internal class Rook : ChessPiece
     {
         public Rook(int x, int y, int color, bool firstmove = true) : base(x, y, color, firstmove) { }
-        public override void MoveGenerator(ChessPiece[,] board)
+        public override void MoveGenerator<T>(T[,] board)
         {
             base.MoveGenerator(board);
             bool closemove = false;

@@ -7,7 +7,7 @@
         public int YCoordinate { get; private set; }// это как бы X(столбец)
         public int Color { get; } //-1: Чёрные, 1: Белые   
         public bool FirstMove { get; private set; }
-        public virtual void Move(int x, int y, ChessPiece[,] board)
+        public virtual void Move<T>(int x, int y, T[,] board)where T: ChessPiece
         {
             if (Moves.Contains((x, y)))
             {
@@ -15,7 +15,7 @@
                 FirstMove = false;
                 XCoordinate = x;
                 YCoordinate = y;
-                board[x, y] = this;
+                board[x, y] = this as T;
                 board[oldx, oldy] = null;
             }
         }
@@ -27,7 +27,7 @@
             YCoordinate = y;
             Color = color;
         }
-        public virtual void MoveGenerator(ChessPiece[,] Board) { Moves = []; }
+        public virtual void MoveGenerator<T>(T[,] Board)where T:ChessPiece { Moves = []; }
         protected void Add(int x,int y)
         {
             Moves.Add((x, y));
