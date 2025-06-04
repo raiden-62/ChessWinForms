@@ -9,10 +9,22 @@ namespace Chess
         private string _folderPath;
         private string _filePath;
         private bool isJSON => cmbSerialization.SelectedItem.ToString() == "JSON";
-            
+
+        // Delegate for game initialization
+        private delegate void InitializeGame(string path, bool isJson, bool newGame);
+        private InitializeGame _gameInitializer;
+
         public MenuForm()
         {
             InitializeComponent();
+
+            // Initialize with default game initialization logic
+            _gameInitializer = (path, isJson, newGame) =>
+            {
+                var gameForm = new GameForm(path, isJson, newGame);
+                gameForm.Show();
+                this.Hide();
+            };
 
             btnResumeGame.Click += ResumeGame;
             btnNewGame.Click += SelectFolder;
@@ -27,22 +39,16 @@ namespace Chess
 
         private void StartNewGame(object sender, EventArgs e)
         {
-            string folder = _folderPath;
-            var gameForm = new GameForm(_folderPath, isJSON);
-            gameForm.Show();
-            this.Hide();
+            _gameInitializer(_folderPath, isJSON, true);
         }
 
         private void ResumeGame(object sender, EventArgs e)
         {
-            var gameForm = new GameForm(_filePath, isJSON, false);
-            gameForm.Show();
-            this.Hide();
+            _gameInitializer(_filePath, isJSON, false);
         }
 
         private void SelectFolder(object sender, EventArgs e)
         {
-
             var folderDialog = new FolderBrowserDialog()
             {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
@@ -54,12 +60,12 @@ namespace Chess
             {
                 _folderPath = folderDialog.SelectedPath;
             }
-
         }
+
         private void SelectFile(object sender, EventArgs e)
         {
             string title = "Выберите файл сохраненной игры";
-            string filter = "All Files|*.*"; 
+            string filter = "All Files|*.*";
             string initialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             using (var openFileDialog = new OpenFileDialog())
             {
@@ -67,16 +73,14 @@ namespace Chess
                 openFileDialog.Filter = filter;
                 openFileDialog.Multiselect = false; // Force single-file selection
 
-                
-                // Show dialog and return the selected file path
+
+               
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     _filePath = openFileDialog.FileName;
                     txtFolderPath.Text = openFileDialog.FileName;
-
                 }
             }
-
 
             btnResumeGame.Enabled = Serializer.IsFileValid(_filePath, isJSON);
             if (!Serializer.IsFileValid(_filePath, isJSON)) MessageBox.Show("Выбран некорректный файл");
@@ -84,7 +88,6 @@ namespace Chess
 
         private void ChangeFormat(object sender, EventArgs e)
         {
-
             if (!Serializer.IsFileValid(_filePath, !isJSON) || _filePath == null) return;
 
             var json = new SerializerJSON(Path.GetDirectoryName(_filePath));
@@ -93,7 +96,6 @@ namespace Chess
             if (isJSON) //xml->json
             {
                 json.Serialize(xml.Deserialize());
-
             }
             else //json->xml
             {
