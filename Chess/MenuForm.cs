@@ -10,7 +10,6 @@ namespace Chess
         private string _filePath;
         private bool isJSON => cmbSerialization.SelectedItem.ToString() == "JSON";
             
-        
         public MenuForm()
         {
             InitializeComponent();
@@ -20,11 +19,10 @@ namespace Chess
             btnNewGame.Click += StartNewGame;
             btnSelectFile.Click += SelectFile;
 
+            cmbSerialization.Items.AddRange(new object[] { "JSON", "XML" });
+            cmbSerialization.SelectedItem = "JSON";
+            cmbSerialization.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSerialization.SelectedIndexChanged += ChangeFormat;
-
-            InitializeSerializationComboBox();
-
-            
         }
 
         private void StartNewGame(object sender, EventArgs e)
@@ -37,25 +35,11 @@ namespace Chess
 
         private void ResumeGame(object sender, EventArgs e)
         {
-            var gameForm = new GameForm(_filePath, isJSON, false); //add loading previous game
+            var gameForm = new GameForm(_filePath, isJSON, false);
             gameForm.Show();
             this.Hide();
         }
-        // In your form's constructor or Load event
-        private void InitializeSerializationComboBox()
-        {
-            // Add the serialization options
-            cmbSerialization.Items.AddRange(new object[] { "JSON", "XML" });
 
-            // Set JSON as default selected item
-            cmbSerialization.SelectedItem = "JSON";
-
-            // Make it non-editable (user can only select from list)
-            cmbSerialization.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            // Optional: Set a tooltip
-            //toolTip1.SetToolTip(comboSerialization, "Select serialization format");
-        }
         private void SelectFolder(object sender, EventArgs e)
         {
 
@@ -95,12 +79,11 @@ namespace Chess
 
 
             btnResumeGame.Enabled = Serializer.IsFileValid(_filePath, isJSON);
-
+            if (!Serializer.IsFileValid(_filePath, isJSON)) MessageBox.Show("Выбран некорректный файл");
         }
 
         private void ChangeFormat(object sender, EventArgs e)
         {
-            //btnResumeGame.Enabled = Serializer.IsFileValid(_filePath, isJSON); //SHOULDNT ACTUALLY BE HERE
 
             if (!Serializer.IsFileValid(_filePath, !isJSON) || _filePath == null) return;
 

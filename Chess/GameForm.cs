@@ -24,19 +24,14 @@ namespace Chess
             InitializeComponent();
             InitializeBoard();
 
-            if (!newGame) path = Path.GetDirectoryName(path); //kinda not sure about this
+            if (!newGame) path = Path.GetDirectoryName(path); //Assumes we're always working with the same ChessGame filename
 
             if (isJSON) _serializer = new SerializerJSON(path);
             else _serializer = new SerializerXML(path);
 
-            if (newGame)
-            {
-                _game = new Game();
-            }
-            else
-            {
-                _game = _serializer.Deserialize();
-            }
+            if (newGame)  _game = new Game();
+            else  _game = _serializer.Deserialize();
+            
 
             SyncBoard();
             this.FormClosing += ClosingGame;
@@ -135,6 +130,8 @@ namespace Chess
             if (_game.Board[flippedRow, y] != null && _game.X1 != -1) DrawPossibleMoves(_game.Board[flippedRow, y] as IFutureMove); //draw possible moves
             else if (_game.X1 == -1) DrawPossibleMoves(null, false); //erase possible moves 
 
+            SyncBoard();
+
             if (gameState != 0)
             {
                 string message = "";
@@ -153,8 +150,10 @@ namespace Chess
                 }
                 MessageBox.Show(message);
             }
-
-            SyncBoard();
+            if (gameState == 1 || gameState == -1)
+            {
+                this.Close();
+            }
         }
 
         private void ClosingGame(object sender, EventArgs e)

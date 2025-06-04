@@ -68,15 +68,15 @@
             // 
             cmbSerialization.Location = new Point(623, 415);
             cmbSerialization.Name = "cmbSerialization";
-            cmbSerialization.Size = new Size(121, 23);
+            cmbSerialization.Size = new Size(82, 23);
             cmbSerialization.TabIndex = 3;
             // 
             // txtFolderPath
             // 
-            txtFolderPath.Location = new Point(313, 456);
+            txtFolderPath.Location = new Point(239, 456);
             txtFolderPath.Name = "txtFolderPath";
             txtFolderPath.ReadOnly = true;
-            txtFolderPath.Size = new Size(374, 23);
+            txtFolderPath.Size = new Size(533, 23);
             txtFolderPath.TabIndex = 4;
             txtFolderPath.Text = "Выбранный файл";
             txtFolderPath.TextAlign = HorizontalAlignment.Center;
