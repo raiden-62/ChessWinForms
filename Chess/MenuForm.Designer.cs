@@ -30,7 +30,7 @@
         {
             btnNewGame = new Button();
             btnResumeGame = new Button();
-            btnSelectFolder = new Button();
+            btnSelectFile = new Button();
             cmbSerialization = new ComboBox();
             txtFolderPath = new TextBox();
             txtSerializationFormat = new TextBox();
@@ -54,14 +54,14 @@
             btnResumeGame.Text = "Продолжить игру";
             btnResumeGame.UseVisualStyleBackColor = true;
             // 
-            // btnSelectFolder
+            // btnSelectFile
             // 
-            btnSelectFolder.Location = new Point(430, 400);
-            btnSelectFolder.Name = "btnSelectFolder";
-            btnSelectFolder.Size = new Size(150, 50);
-            btnSelectFolder.TabIndex = 2;
-            btnSelectFolder.Text = "Выбрать папку";
-            btnSelectFolder.UseVisualStyleBackColor = true;
+            btnSelectFile.Location = new Point(430, 400);
+            btnSelectFile.Name = "btnSelectFile";
+            btnSelectFile.Size = new Size(150, 50);
+            btnSelectFile.TabIndex = 2;
+            btnSelectFile.Text = "Выбрать файл сохранения";
+            btnSelectFile.UseVisualStyleBackColor = true;
             // 
             // cmbSerialization
             // 
@@ -76,7 +76,7 @@
             txtFolderPath.Name = "txtFolderPath";
             txtFolderPath.Size = new Size(257, 23);
             txtFolderPath.TabIndex = 4;
-            txtFolderPath.Text = "Папка для сериализации";
+            txtFolderPath.Text = "Выбранный файл";
             txtFolderPath.TextAlign = HorizontalAlignment.Center;
             // 
             // txtSerializationFormat
@@ -95,7 +95,7 @@
             Controls.Add(txtSerializationFormat);
             Controls.Add(txtFolderPath);
             Controls.Add(cmbSerialization);
-            Controls.Add(btnSelectFolder);
+            Controls.Add(btnSelectFile);
             Controls.Add(btnResumeGame);
             Controls.Add(btnNewGame);
             Name = "MenuForm";
@@ -108,7 +108,7 @@
 
         private Button btnNewGame;
         private Button btnResumeGame;
-        private Button btnSelectFolder;
+        private Button btnSelectFile;
         private ComboBox cmbSerializeExtension;
         private ComboBox cmbSerialization;
         private TextBox txtFolderPath;

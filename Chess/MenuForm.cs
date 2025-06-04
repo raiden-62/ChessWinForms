@@ -1,11 +1,12 @@
 using System.Data;
+using System.Windows.Forms;
 
 namespace Chess
 {
     public partial class MenuForm : Form
     {
         private string _folderPath;
-
+        private string _filePath;
         private bool isJSON => cmbSerialization.SelectedItem.ToString() == "JSON";
             
         
@@ -13,9 +14,11 @@ namespace Chess
         {
             InitializeComponent();
 
-            btnSelectFolder.Click += SelectFolder;
+            //btnSelectFolder.Click += SelectFolder;
             btnResumeGame.Click += ResumeGame;
+            btnNewGame.Click += SelectFolder;
             btnNewGame.Click += StartNewGame;
+            btnSelectFile.Click += SelectFile;
 
             InitializeSerializationComboBox();
         }
@@ -30,7 +33,7 @@ namespace Chess
 
         private void ResumeGame(object sender, EventArgs e)
         {
-            var gameForm = new GameForm(_folderPath, isJSON, false); //add loading previous game
+            var gameForm = new GameForm(_filePath, isJSON, false); //add loading previous game
             gameForm.Show();
             this.Hide();
         }
@@ -56,15 +59,35 @@ namespace Chess
             {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 Description = "Select a folder",
-                UseDescriptionForTitle = true // This applies the description to the dialog title
+                UseDescriptionForTitle = true //uses this^ for title
             };
 
             if (folderDialog.ShowDialog() == DialogResult.OK)
             {
-                txtFolderPath.Text = folderDialog.SelectedPath;
                 _folderPath = folderDialog.SelectedPath;
             }
 
+        }
+        private void SelectFile(object sender, EventArgs e)
+        {
+            string title = "Select a File";
+            string filter = "All Files|*.*"; 
+            string initialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            using (var openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Title = title;
+                openFileDialog.Filter = filter;
+                openFileDialog.Multiselect = false; // Force single-file selection
+
+                
+                // Show dialog and return the selected file path
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    _filePath = openFileDialog.FileName;
+                    txtFolderPath.Text = openFileDialog.FileName;
+
+                }
+            }
         }
     }
 }

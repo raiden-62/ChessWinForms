@@ -17,31 +17,37 @@ namespace Chess
         private Button[,] _cells;
         private const int cellSize = 45;
         private Game _game;
-        private string _folderPath;
         private Serializer _serializer;
 
-        public GameForm(string folderPath, bool isJSON, bool newGame = true)
+        public GameForm(string path, bool isJSON, bool newGame = true)
         {
             InitializeComponent();
-
-            _cells = new Button[8, 8];
             InitializeBoard();
 
-            _folderPath = folderPath;
-            if (isJSON) _serializer = new SerializerJSON(folderPath);
-            else _serializer = new SerializerXML(folderPath);
-            this.FormClosing += ClosingGame;
+            if (!newGame) path = Path.GetDirectoryName(path); //kinda not sure about this
+
+            if (isJSON) _serializer = new SerializerJSON(path);
+            else _serializer = new SerializerXML(path);
 
 
-            if (newGame) _game = new Game();
-            else _game = _serializer.Deserialize();
+            if (newGame)
+            {
+                _game = new Game();
+            }
+            else
+            {
+                _game = _serializer.Deserialize();
+            }
 
             SyncBoard();
+            this.FormClosing += ClosingGame;
         }
 
 
         private void InitializeBoard()
         {
+            _cells = new Button[8, 8];
+
             GamePanel.Controls.Clear();
             GamePanel.Width = cellSize * 8;
             GamePanel.Height = cellSize * 8;
@@ -66,9 +72,6 @@ namespace Chess
 
                     GamePanel.Controls.Add(btn); //adds to the panel
                     _cells[row, col] = btn;
-
-
-
                 }
             }
         }
@@ -143,7 +146,7 @@ namespace Chess
                     case 1:
                         message = "Победа белых."; break;
                     case 2:
-                        message = "Ничья."; break;     
+                        message = "Ничья."; break;
                     case 3:
                         if (_game.ColorPlayer == 1) message = "Шах белому королю!";
                         else message = "Шах черному королю!";
