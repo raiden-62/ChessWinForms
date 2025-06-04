@@ -19,6 +19,7 @@
                 board[oldx, oldy] = null;
             }
         }
+        
         public ChessPiece(int x,int y,int color,bool firstmove=true)
         {
             FirstMove = firstmove;

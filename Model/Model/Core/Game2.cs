@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+
     public partial class Game
     {
+        public int PosGame { get; private set; }
         private (int x, int y) PosKing()
         {
             for (int x = 0; x < 8; x++)
@@ -80,7 +82,9 @@ namespace Model
                 }
             }
             return false;
+
         }
+        
         private bool IsCheckmate()
         {
             return IsCheck() && !HasAnyValidMoves();
@@ -107,6 +111,16 @@ namespace Model
                 return 3; // Шах
             }
             return 0; // Игра продолжается
+        }
+        public static bool operator ==(Game game, int posgame)
+        {
+            if (game.PosGame == posgame) return true;
+            return false;
+        }
+        public static bool operator !=(Game game, int posgame)
+        {
+            if (game.PosGame != posgame) return true;
+            return false;
         }
     }
 }
