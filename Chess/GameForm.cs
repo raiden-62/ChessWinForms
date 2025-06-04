@@ -169,6 +169,7 @@ namespace Chess
         private void ClosingGame(object sender, EventArgs e)
         {
             _serializer.Serialize(_game);
+            Application.Exit();
         }
 
 
