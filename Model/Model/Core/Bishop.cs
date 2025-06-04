@@ -19,7 +19,7 @@ namespace Model
             }
             return closemove;
         }
-        public override void MoveGenerator(ChessPiece[,] board)
+        public override void MoveGenerator<T>(T[,] board)
         {
             base.MoveGenerator(board);
             bool closemove = false;

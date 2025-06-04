@@ -9,7 +9,7 @@ namespace Model
     internal class Knight : ChessPiece
     {
         public Knight(int x, int y, int color) : base(x, y, color) { }
-        public override void MoveGenerator(ChessPiece[,] board)
+        public override void MoveGenerator<T>(T[,] board)
         {
             base.MoveGenerator(board);
             int x = XCoordinate + 2, y = YCoordinate + 1;

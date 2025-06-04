@@ -10,6 +10,6 @@ namespace Model
     {
         public int XCoordinate { get; }
         public int YCoordinate { get; }
-        public void Move(int x,int y, ChessPiece[,] board);
+        public void Move<T>(int x,int y, T[,] board) where T:ChessPiece;
     }
 }
