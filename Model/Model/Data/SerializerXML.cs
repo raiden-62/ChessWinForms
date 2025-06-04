@@ -86,7 +86,7 @@ namespace Model
                     else if (type == typeof(Bishop).ToString()) piece = new Bishop(dtoPiece.Row, dtoPiece.Column, dtoPiece.Color);
                     else if (type == typeof(Rook).ToString()) piece = new Rook(dtoPiece.Row, dtoPiece.Column, dtoPiece.Color, dtoPiece.FirstMove);
                     else if (type == typeof(King).ToString()) piece = new King(dtoPiece.Row, dtoPiece.Column, dtoPiece.Color, dtoPiece.FirstMove);
-                    else if (type == typeof(Queen).ToString()) piece = new Bishop(dtoPiece.Row, dtoPiece.Column, dtoPiece.Color);
+                    else if (type == typeof(Queen).ToString()) piece = new Queen(dtoPiece.Row, dtoPiece.Column, dtoPiece.Color);
                     else piece = null;
 
                     board[i / 8, i % 8] = piece;
