@@ -57,6 +57,7 @@ namespace Model
             if (Board[X1,Y1] == null)
             {
                 ColorPlayer = -ColorPlayer;
+                AddMemory(X1, Y1);
                 X1 = -1; Y1 = -1;
                 return CheckGame();
             }
