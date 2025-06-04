@@ -14,9 +14,9 @@ namespace Model
     public partial class Game
     {
         public ChessPiece[,] Board { get; }
-        public int ColorPlayer { get; private set; }
-        public int X1 { get; private set; } = -1;
-        public int Y1 { get; private set; } = -1;
+        private int ColorPlayer { get; set; }
+        private int X1 { get; set; } = -1;
+        private int Y1 { get; set; } = -1;
         public Game(ChessPiece[,] board, int colorplayer, int gameState)
         {
             Board = board;
