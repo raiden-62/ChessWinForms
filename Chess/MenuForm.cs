@@ -20,7 +20,11 @@ namespace Chess
             btnNewGame.Click += StartNewGame;
             btnSelectFile.Click += SelectFile;
 
+            cmbSerialization.SelectedIndexChanged += ChangeFormat;
+
             InitializeSerializationComboBox();
+
+            
         }
 
         private void StartNewGame(object sender, EventArgs e)
@@ -91,9 +95,27 @@ namespace Chess
 
 
             btnResumeGame.Enabled = Serializer.IsFileValid(_filePath, isJSON);
-            
-            
 
+        }
+
+        private void ChangeFormat(object sender, EventArgs e)
+        {
+            //btnResumeGame.Enabled = Serializer.IsFileValid(_filePath, isJSON); //SHOULDNT ACTUALLY BE HERE
+
+            if (!Serializer.IsFileValid(_filePath, !isJSON) || _filePath == null) return;
+
+            var json = new SerializerJSON(Path.GetDirectoryName(_filePath));
+            var xml = new SerializerXML(Path.GetDirectoryName(_filePath));
+
+            if (isJSON) //xml->json
+            {
+                json.Serialize(xml.Deserialize());
+
+            }
+            else //json->xml
+            {
+                xml.Serialize(json.Deserialize());
+            }
         }
     }
 }

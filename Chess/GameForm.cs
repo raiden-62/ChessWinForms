@@ -19,7 +19,7 @@ namespace Chess
         private Game _game;
         private Serializer _serializer;
 
-        public GameForm(string path, bool isJSON, bool newGame = true)
+        public GameForm( string path, bool isJSON, bool newGame = true)
         {
             InitializeComponent();
             InitializeBoard();
@@ -28,7 +28,6 @@ namespace Chess
 
             if (isJSON) _serializer = new SerializerJSON(path);
             else _serializer = new SerializerXML(path);
-
 
             if (newGame)
             {
