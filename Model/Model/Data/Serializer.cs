@@ -16,7 +16,7 @@ namespace Model
         {
             get
             {
-                if (_folderPath == null) return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), _filename+ Extension);
+                if (_folderPath == null) return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), _filename+ Extension); //По умолчанию всегда рабочий стол
                 return Path.Combine(_folderPath, _filename + Extension);
             }
         }
@@ -32,17 +32,17 @@ namespace Model
         public static bool IsFileValid(string filePath, bool isJson)
         {
             var ext = Path.GetExtension(filePath);
-            if ((isJson && ext != ".json") || (!isJson && ext != ".xml")) return false;
-            if (Path.GetFileNameWithoutExtension(filePath) != _filename) return false;
+            if ((isJson && ext != ".json") || (!isJson && ext != ".xml")) return false; //соответствие расширения
+            if (Path.GetFileNameWithoutExtension(filePath) != _filename) return false;// название = ChessGame
 
             Serializer serializer = isJson ? new SerializerJSON(Path.GetDirectoryName(filePath)) : new SerializerXML(Path.GetDirectoryName(filePath));
-            try
+            try //Попытка десериализации
             {
                 var game = serializer.Deserialize();
                 if (game == null) return false;
-                if (game == -1 || game == 1) return false;
+                if (game == -1 || game == 1) return false; //Игра уже окончена
             }
-            catch
+            catch //Произошла ошибка
             {
                 return false;
             }

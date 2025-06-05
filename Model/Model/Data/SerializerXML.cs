@@ -38,7 +38,7 @@ namespace Model
         {
             ColorPlayer = game.ColorPlayer;
             GameState = game.PosGame;
-            Board2D = new ChessPieceDTO[64]; //flattened board
+            Board2D = new ChessPieceDTO[64]; //Матрица 8*8 -> массив 64, т.к. System.Xml.Serialization не может сериализовать матрицы (но можно [][] зубчатые)
             for (int row = 0; row < 8; row++)
             {
                 for (int col = 0; col < 8; col++)
@@ -89,7 +89,7 @@ namespace Model
                     else if (type == typeof(Queen).ToString()) piece = new Queen(dtoPiece.Row, dtoPiece.Column, dtoPiece.Color);
                     else piece = null;
 
-                    board[i / 8, i % 8] = piece;
+                    board[i / 8, i % 8] = piece; //Восстановление из массива 64 в матрицу 8*8
                 }
             }
 

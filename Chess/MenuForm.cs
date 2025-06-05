@@ -8,17 +8,17 @@ namespace Chess
     {
         private string _folderPath;
         private string _filePath;
-        private bool isJSON => cmbSerialization.SelectedItem.ToString() == "JSON";
+        private bool isJSON => cmbSerialization.SelectedItem.ToString() == "JSON"; //Проверят что выбрано в комбо-боксе
 
-        // Delegate for game initialization
-        private delegate void InitializeGame(string path, bool isJson, bool newGame);
+        
+        private delegate void InitializeGame(string path, bool isJson, bool newGame); //делегат для инициализации игры
         private InitializeGame _gameInitializer;
 
         public MenuForm()
         {
             InitializeComponent();
 
-            // Initialize with default game initialization logic
+            //Инициализируем делегат
             _gameInitializer = (path, isJson, newGame) =>
             {
                 var gameForm = new GameForm(path, isJson, newGame);
@@ -26,78 +26,80 @@ namespace Chess
                 this.Hide();
             };
 
-            btnResumeGame.Click += ResumeGame;
-            btnNewGame.Click += SelectFolder;
-            btnNewGame.Click += StartNewGame;
-            btnSelectFile.Click += SelectFile;
+            btnResumeGame.Click += ResumeGame; //Продолжение игры
+            btnNewGame.Click += SelectFolder; //Выбор папки
+            btnNewGame.Click += StartNewGame; //Начало новой игры (после выбора папки)
+            btnSelectFile.Click += SelectFile; //Выбор файла сохранения
 
-            cmbSerialization.Items.AddRange(new object[] { "JSON", "XML" });
-            cmbSerialization.SelectedItem = "JSON";
-            cmbSerialization.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbSerialization.SelectedIndexChanged += ChangeFormat;
+            cmbSerialization.Items.AddRange(new object[] { "JSON", "XML" }); //Добавляем элементы в комбо-бокс
+            cmbSerialization.SelectedItem = "JSON"; //Элемент который выбран по умолчанию = JSON
+            cmbSerialization.DropDownStyle = ComboBoxStyle.DropDownList; //Стиль = выпадающий список с неизменяемыми элементами
+            cmbSerialization.SelectedIndexChanged += ChangeFormat; //Метод вызываемый при изменении выбранного элемента
         }
 
         private void StartNewGame(object sender, EventArgs e)
         {
-            _gameInitializer(_folderPath, isJSON, true);
+            _gameInitializer(_folderPath, isJSON, true); //true = новая игра
         }
 
         private void ResumeGame(object sender, EventArgs e)
         {
-            _gameInitializer(_filePath, isJSON, false);
+            _gameInitializer(_filePath, isJSON, false); //false = продолжение игры
         }
 
         private void SelectFolder(object sender, EventArgs e)
         {
-            var folderDialog = new FolderBrowserDialog()
+            var folderDialog = new FolderBrowserDialog() //Диалоговое окно для выбора папки
             {
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop), //Изначально открывает рабочий стол в проводнике
                 Description = "Выберите папку для сохранения",
-                UseDescriptionForTitle = true //uses this^ for title
+                UseDescriptionForTitle = true
+                //Description показывается снизу над строкой выбора папки
+                //Title - название окна (слева сверху)
+                //UseDescriptionForTitle = true убирает Description снизу и показывает этот текст как Title (слева сверху)
+                //При false Title будет "Выберите папку"
             };
 
-            if (folderDialog.ShowDialog() == DialogResult.OK)
+            if (folderDialog.ShowDialog() == DialogResult.OK) //Если пользователь нажал "принять"
             {
-                _folderPath = folderDialog.SelectedPath;
+                _folderPath = folderDialog.SelectedPath; //Сохраняем выбранный путь
             }
         }
 
         private void SelectFile(object sender, EventArgs e)
         {
-            string title = "Выберите файл сохраненной игры";
-            string filter = "All Files|*.*";
-            string initialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             using (var openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Title = title;
-                openFileDialog.Filter = filter;
-                openFileDialog.Multiselect = false; // Force single-file selection
+                openFileDialog.Title = "Выберите файл сохраненной игры"; //Title можно указать сразу
+                openFileDialog.Filter = "All Files|*.*"; //Любые файлы могут быть выбраны
+                openFileDialog.Multiselect = false; // Нельзя выбрать несколько файлов
 
 
                
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                if (openFileDialog.ShowDialog() == DialogResult.OK) //Если пользователь нажал "принять"
                 {
-                    _filePath = openFileDialog.FileName;
-                    txtFolderPath.Text = openFileDialog.FileName;
+                    _filePath = openFileDialog.FileName; //Сохраняем выбранный путь
+                    txtFolderPath.Text = openFileDialog.FileName; //Показываем выбранный путь
                 }
             }
-
+            //Если файл корректный то кнопка "Продолжить игру" активируется, иначе деактивируется 
             btnResumeGame.Enabled = Serializer.IsFileValid(_filePath, isJSON);
-            if (!Serializer.IsFileValid(_filePath, isJSON)) MessageBox.Show("Выбран некорректный файл");
+            if (!Serializer.IsFileValid(_filePath, isJSON)) MessageBox.Show("Выбран некорректный файл"); //Выводим сообщение если файл некорректный
         }
 
         private void ChangeFormat(object sender, EventArgs e)
         {
-            if (!Serializer.IsFileValid(_filePath, !isJSON) || _filePath == null) return;
+            //Копирование из одного формата в другой не нужно проводить если файл не выбран, файл некорректный (нельзя скопировать)
+            if (!Serializer.IsFileValid(_filePath, !isJSON) || _filePath == null) return; 
 
             var json = new SerializerJSON(Path.GetDirectoryName(_filePath));
             var xml = new SerializerXML(Path.GetDirectoryName(_filePath));
 
-            if (isJSON) //xml->json
+            if (isJSON) //Копирование XML->JSON
             {
                 json.Serialize(xml.Deserialize());
             }
-            else //json->xml
+            else //Копирование JSON->XML
             {
                 xml.Serialize(json.Deserialize());
             }

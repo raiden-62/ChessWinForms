@@ -31,7 +31,7 @@ namespace Model
             ChessPiece[,] board = new ChessPiece[8, 8];
             for (int i = 0; i < 64; i++)
             {
-                var dtoPiece = dto.Board2D[i];
+                var dtoPiece = dto.Board2D[i]; 
                 if (dtoPiece != null)
                 {
                     ChessPiece piece;
@@ -44,7 +44,7 @@ namespace Model
                     else if (type == typeof(Queen).ToString()) piece = new Queen(dtoPiece.Row, dtoPiece.Column, dtoPiece.Color);
                     else piece = null;
 
-                    board[i / 8, i % 8] = piece;
+                    board[i / 8, i % 8] = piece; //Восстановление из массива 64 в матрицу 8*8
                 }
             }
 
