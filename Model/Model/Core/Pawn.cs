@@ -14,15 +14,15 @@ namespace Model
         {
             base.MoveGenerator(board);
 
-            if (board[XCoordinate+Color, YCoordinate] == null)
+            if (board[XCoordinate+Color, YCoordinate] == null) // пустая клетка перед пешкой
             {
                 Add(XCoordinate+Color, YCoordinate);
-                if (FirstMove && board[XCoordinate+Color*2, YCoordinate] == null)
+                if (FirstMove && board[XCoordinate+Color*2, YCoordinate] == null) // возможность сходить на две клетки
                     Add(XCoordinate+Color*2, YCoordinate);
             }
-            if (YCoordinate != 7 && board[XCoordinate+Color, YCoordinate+1] != null && board[XCoordinate + Color, YCoordinate + 1].Color != Color)
+            if (YCoordinate != 7 && board[XCoordinate+Color, YCoordinate+1] != null && board[XCoordinate + Color, YCoordinate + 1].Color != Color) //убийство 
                 Add(XCoordinate + Color, YCoordinate +1);
-            if (YCoordinate != 0 && board[XCoordinate + Color, YCoordinate - 1] != null && board[XCoordinate + Color, YCoordinate - 1].Color != Color)
+            if (YCoordinate != 0 && board[XCoordinate + Color, YCoordinate - 1] != null && board[XCoordinate + Color, YCoordinate - 1].Color != Color) //убийство
                 Add(XCoordinate +Color, YCoordinate - 1);
         }
         public override string ToString()

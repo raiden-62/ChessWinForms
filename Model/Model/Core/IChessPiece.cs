@@ -8,8 +8,8 @@ namespace Model
 {
     internal interface IChessPiece
     {
-        public int XCoordinate { get; }
-        public int YCoordinate { get; }
-        public void Move<T>(int x,int y, T[,] board) where T:ChessPiece;
+        public int XCoordinate { get; } //строка
+        public int YCoordinate { get; } //столбец
+        public void Move<T>(int x,int y, T[,] board) where T:ChessPiece; // метод хода
     }
 }

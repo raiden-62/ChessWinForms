@@ -8,7 +8,7 @@ namespace Model
 {
     public interface IFutureMove
     {
-        public List<(int x, int y)> Moves { get; }
-        public void MoveGenerator<T>(T[,] board) where T : ChessPiece;
+        public List<(int x, int y)> Moves { get; } //возможные ходы
+        public void MoveGenerator<T>(T[,] board) where T : ChessPiece; // генерация возможных ходов
     }
 }

@@ -12,15 +12,15 @@ namespace Model
         public override void MoveGenerator<T>(T[,] board)
         {
             base.MoveGenerator(board);
-            bool closemove = false;
-            for (int x = XCoordinate+1; x< 8; x++)
+            bool closemove = false; // напрваление не закрыто
+            for (int x = XCoordinate+1; x< 8; x++)//ходы по напрвление
             {
-                if (closemove) break;
-                if (board[x, YCoordinate] == null) Add(x, YCoordinate);
+                if (closemove) break;// выход если напрваление закрыто
+                if (board[x, YCoordinate] == null) Add(x, YCoordinate);// возможный ход на пустую клетку
                 else
                 {
-                    closemove = true;
-                    if (board[x, YCoordinate].Color != Color) Add(x, YCoordinate);
+                    closemove = true;// закрытие направления
+                    if (board[x, YCoordinate].Color != Color) Add(x, YCoordinate); // возможность забарть фигуру
                 }
             }
             closemove = false;

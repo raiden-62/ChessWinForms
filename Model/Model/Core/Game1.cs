@@ -13,9 +13,9 @@ namespace Model
 {
     public partial class Game
     {
-        public ChessPiece[,] Board { get; }
-        public int ColorPlayer { get; private set; }
-        public int X1 { get; private set; } = -1;
+        public ChessPiece[,] Board { get; } // доска
+        public int ColorPlayer { get; private set; } // цвет ходящего игрока
+        public int X1 { get; private set; } = -1; // координаты выбранной для хода фигуры
         public int Y1 { get; private set; } = -1;
         public Game(ChessPiece[,] board, int colorplayer, int gameState)
         {
@@ -43,9 +43,9 @@ namespace Model
         }
         public void Move(int x,int y)
         {
-            if ((X1 == -1 || Y1 == -1))
+            if ((X1 == -1 || Y1 == -1)) // если выбираем фигуру для хода
             {
-                if ((Board[x, y] != null && Board[x, y].Color == ColorPlayer))
+                if ((Board[x, y] != null && Board[x, y].Color == ColorPlayer)) 
                 {
                     X1 = x; Y1 = y;
                     Board[X1, Y1].MoveGenerator(Board); //Ходы должны генерироваться при первом клике 
@@ -55,16 +55,16 @@ namespace Model
             }
             //System.Diagnostics.Debug.WriteLine(x);
             //System.Diagnostics.Debug.WriteLine(y);
-            Board[X1, Y1].Move(x, y,Board);
-            if (Board[X1,Y1] == null)
+            Board[X1, Y1].Move(x, y,Board); // попытка хода
+            if (Board[X1,Y1] == null) // ход успешен
             {
-                ColorPlayer = -ColorPlayer;
-                AddMemory(X1, Y1);
-                X1 = -1; Y1 = -1;
-                PosGame = CheckGame();
+                ColorPlayer = -ColorPlayer;// смена цвета игрока
+                AddMemory(X1, Y1); // запоминаем ход для ничьи
+                X1 = -1; Y1 = -1; // обнуляем выбор фигуры
+                PosGame = CheckGame(); // обновляем позицию игры  
                 return;
             }
-            X1 = -1; Y1 = -1;
+            X1 = -1; Y1 = -1;// обнуляем выбор фигуры
             PosGame = 0;
             return;
         }

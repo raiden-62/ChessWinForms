@@ -8,8 +8,8 @@ namespace Model
 {
     public partial class Game
     {
-        private (int x, int y)[] _memory = new (int x,int y)[0];
-        private void AddMemory(int x,int y)
+        private (int x, int y)[] _memory = new (int x,int y)[0]; //память ходов
+        private void AddMemory(int x,int y) // добавление хода в память
         {
             if (_memory.Length < 12)
             {
@@ -20,7 +20,7 @@ namespace Model
             Array.Copy(_memory, 1, _memory, 0, _memory.Length - 1);
             _memory[_memory.Length - 1] = (x, y);
         }
-        private bool IsStalemate0()
+        private bool IsStalemate0() //ничья
         {
             if (_memory.Length < 12) return false;
             for (int i =0; i < 4;i++)

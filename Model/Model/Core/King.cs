@@ -14,10 +14,10 @@ namespace Model
             base.MoveGenerator(board);
             for (int x = XCoordinate-1; x <=XCoordinate+1;x++)
             {
-                for (int y = YCoordinate-1; y <= YCoordinate + 1; y++)
-                    if (0 <= x && x <= 7 && 0 <= y && y <= 7 && board[x, y] == null && !IsBrokenField(board, x, y)) Add(x, y);
+                for (int y = YCoordinate-1; y <= YCoordinate + 1; y++) //если клетка не битая, то на неё можно сходить
+                    if (0 <= x && x <= 7 && 0 <= y && y <= 7 && board[x, y] == null && !IsBrokenField(board, x, y) && !(x == XCoordinate && y== YCoordinate)) Add(x, y); 
             }
-            if (FirstMove)
+            if (FirstMove) //Проверка на ракировки,есои первыфй ход
             {
                 if (board[XCoordinate, YCoordinate - 4] != null && board[XCoordinate, YCoordinate - 4].FirstMove && !IsBrokenField(board, XCoordinate, YCoordinate) &&
                     !IsBrokenField(board, XCoordinate, YCoordinate - 1) && board[XCoordinate, YCoordinate - 1] == null && !IsBrokenField(board, XCoordinate, YCoordinate - 2) &&
@@ -33,13 +33,13 @@ namespace Model
         {
             if (Moves.Contains((x, y)))
             {
-                if(YCoordinate-y == -2)
+                if(YCoordinate-y == -2) //рокировка
                 {
                     board[x, 7].MoveGenerator(board);
                     board[x, 7].Move(x, y - 1,board);
                     base.Move(x, y, board);
                 }
-                else if (YCoordinate-y == 2)
+                else if (YCoordinate-y == 2) //рокировка
                 {
                     board[x, 0].MoveGenerator(board);
                     board[x, 0].Move(x, y + 1, board);
@@ -48,7 +48,7 @@ namespace Model
                 else base.Move(x, y, board);
             }
         }
-        public bool IsBrokenField(ChessPiece[,] board,int x, int y)
+        public bool IsBrokenField(ChessPiece[,] board,int x, int y) //битое поле?
         {
             for (int i = 0; i < 8; i++)
             {

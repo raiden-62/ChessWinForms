@@ -10,8 +10,8 @@ namespace Model
 
     public partial class Game
     {
-        public int PosGame { get; private set; }
-        private (int x, int y) PosKing()
+        public int PosGame { get; private set; } // позиция игры
+        private (int x, int y) PosKing() // где находится король
         {
             for (int x = 0; x < 8; x++)
             {
@@ -25,7 +25,7 @@ namespace Model
             }
             return (-1,-1) ;
         }
-        private bool IsSquareUnderAttack(int x, int y)
+        private bool IsSquareUnderAttack(int x, int y) // указанная клетка под атакой?
         {
             for (int i = 0; i < 8; i++)
             {
@@ -45,7 +45,7 @@ namespace Model
             return false;
         }
 
-        private bool IsCheck()
+        private bool IsCheck() // шах?
         {
             (int kingX, int kingY) = PosKing();
             return IsSquareUnderAttack(kingX, kingY);
@@ -85,12 +85,12 @@ namespace Model
 
         }
         
-        private bool IsCheckmate()
+        private bool IsCheckmate() // Мат?
         {
             return IsCheck() && !HasAnyValidMoves();
         }
 
-        private bool IsStalemate()
+        private bool IsStalemate() // Пат?
         {
             return !IsCheck() && !HasAnyValidMoves();
         }
@@ -112,7 +112,7 @@ namespace Model
             }
             return 0; // Игра продолжается
         }
-        public static bool operator ==(Game game, int posgame)
+        public static bool operator ==(Game game, int posgame) // проверка положения игры
         {
             if (game.PosGame == posgame) return true;
             return false;
